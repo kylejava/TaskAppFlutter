@@ -6,6 +6,6 @@ class Task{
 
   void Print(){
     print('Task: ' + NameOfTask);
-    print('Task Number:  $number');
+    print('Task Number: $number');
   }
 }

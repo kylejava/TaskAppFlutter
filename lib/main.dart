@@ -25,9 +25,20 @@ class TaskApp extends StatefulWidget {
 class _TaskAppState extends State<TaskApp> {
 
   var counter = 0;
-  final myController = TextEditingController(
-  );
+  final myController = TextEditingController();
+  final _ToDoList = <Task>[];
 
+  Widget _BuildItem (Task t){
+    return ListTile(
+      title: Text(
+        t.NameOfTask,
+      ),
+    );
+  }
+
+  Widget _BuildTasks(_ToDoList){
+
+  }
 
   @override
   void dispose() {
@@ -58,23 +69,66 @@ class _TaskAppState extends State<TaskApp> {
       ),
       body: Padding(
         padding: EdgeInsets.all(50.0),
-        child: TextField(
-          controller: myController,
-          cursorColor: Colors.black,
-          decoration: InputDecoration(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
 
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.black),
+          children: [
+
+            Text(
+                'Enter New Item' ,
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                ),
             ),
-          ),
+            TextField(
+
+              controller: myController,
+              cursorColor: Colors.black,
+              decoration: InputDecoration(
+
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+
+              ),
+            ),
+
+
+           /*ListView.builder(
+               itemCount: _ToDoList.length,
+               itemBuilder: (context, index){
+                 return ListTile(
+                   title: Text('${_ToDoList[index]}'),
+                 );
+               },
+           ),*/
+
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          counter += 1;
-          Task task1 = Task(NameOfTask:myController.text , number:counter);
-          task1.Print();
-          myController.clear();
+          if(myController.text == ""){
+            return showDialog(
+              context: context,
+              builder: (context){
+                return AlertDialog(
+                  content: Text('Please add new item'),
+                );
+              },
+            );
+          }
+          else {
+            counter += 1;
+            Task new_task = Task(
+                NameOfTask: myController.text, number: counter);
+            new_task.Print();
+            _ToDoList.add(new_task);
+            print(_ToDoList.length);
+
+            myController.clear();
+          }
           /*return showDialog(
             context: context,
             builder: (context){
