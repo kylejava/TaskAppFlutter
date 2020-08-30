@@ -56,6 +56,7 @@ class _TaskAppState extends State<TaskApp> {
           children: [
             Text("Task List"),
             IconButton(
+              onPressed: () {},
               icon: Icon(
                 Icons.assignment,
                 color: Colors.white,
@@ -122,6 +123,7 @@ class _TaskAppState extends State<TaskApp> {
           else {
             counter += 1;
             Task new_task = Task(
+
                 NameOfTask: myController.text, number: counter);
             new_task.Print();
             _ToDoList.add(new_task);
