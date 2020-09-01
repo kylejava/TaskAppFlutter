@@ -1,6 +1,8 @@
+
+
 class Task{
   String NameOfTask;
-  var number;
+  var number; //Number of task on the list
 
   Task({this.NameOfTask , this.number});
 
